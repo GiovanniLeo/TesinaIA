@@ -1,0 +1,43 @@
+\documentclass[12pt,oneside]{report}
+\usepackage{import}
+\import{./Utility/}{preambolo}     %serve per fare import a cascata
+            
+\begin{document} 
+	                
+	\begin{titlepage}
+		\input{Capitoli/Front}
+	\end{titlepage} 
+    
+    %Dediche iniziali
+  
+   	%Abstract Tesi
+   	\pagenumbering{Roman}
+
+	\setcounter{tocdepth}{3}
+	\setcounter{secnumdepth}{5}
+	
+    %Indice
+    \tableofcontents{}
+    \listoftables
+    %\listoflistings
+    \newpage
+    \pagenumbering{arabic}
+    %Capitolo 1
+    \chapter{Introduzione}
+    \import{Capitoli/Capitolo1/}{Introduzione}
+    %Capitolo 2
+    \chapter{Stato dell'Arte}
+    \import{Capitoli/Capitolo2/}{StatoDellArte}
+   	%Capitolo 3
+    \chapter{Algoritmo}
+    \import{Capitoli/Capitolo3/}{Algoritmo}
+	%Capitolo 4
+	\chapter{Implementazione}
+	 \import{Capitoli/Capitolo4/}{Implementazione}
+	%Capitolo 5
+	\chapter{Sperimentazione}
+	 \import{Capitoli/Capitolo5/}{Sperimentazione}
+ 
+    \bibliography{bibliografia} 
+    \bibliographystyle{ieeetr}
+\end{document}

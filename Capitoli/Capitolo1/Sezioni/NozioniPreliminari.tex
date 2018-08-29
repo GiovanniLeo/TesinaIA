@@ -1,0 +1,131 @@
+\section{Nozioni Preliminari}
+Prima di esporre le RFD è necessario introdurre alcuni concetti preliminari.
+
+\subsection{Schema di relazione}
+Uno schema di relazione è costituito da un simbolo $R$, detto nome della relazione, e da un insieme di attributi $X = \{A_1,A_2,...,A_n\}$, di solito indicato
+con $R(X)$. A ciascun attributo $A \in X$ e associato un dominio $dom(A)$.
+Uno schema di base di dati è un insieme di schemi di relazione con nomi
+diversi:
+\\~\\
+\centerline{$R = \{ R_1(X_1),R_2(X_2),\ldots,R_n(X_n)\}$.}
+\\~\\
+Una relazione su uno schema $R(X)$ è un insieme $r$ di tuple su $X$. Per
+ogni istanza $r \in R(X)$, per ogni tupla $t \in r$ e per ogni attributo $A \in X$,
+$t[A]$ rappresenta la proiezione di $A$ su $t$. In modo analogo, dato un insieme
+di attributi $Y \subseteq X$, $t[Y]$ rappresenta la proiezione di $Y$ su $t$.\cite{libroCeri}
+
+
+\begin{table}[H]
+    \centering
+    \begin{tabular}{ | l | l | l | l |}
+        \hline
+        Matricola & Cognome & Nome & Data di nascita\\
+        \hline
+        123456 & Rossi & Maria & 25/11/1991 \\ 
+        654321 & Neri & Anna & 23/04/1992 \\ 
+        456321 & Verdi & Fabio & 12/02/1992 \\
+        \hline
+    \end{tabular}
+    \caption{Esempio di schema di relazione}
+    \label{tab:table example}
+\end{table}
+
+\subsection{Dipendenze funzionali canoniche}
+Una \textit{dipendenza funzionale}, abbreviata in FD, è un vincolo di integrità semantico per il modello relazionale che descrive i legami di tipo funzionale tra gli attributi di una relazione. \\
+Data una relazione $r$ su uno schema $R(X)$ e due sottoinsiemi di attributi non vuoti $Y$ e $Z$ di $X$, diremo che esiste su $r$ una dipendenza funzionale tra $Y$ e $Z$, se, per ogni coppia di tuple $t_1$ e $t_2$ di $r$ aventi gli stessi valori sugli attributi $Y$, risulta che $t_1$ e $t_2$ hanno gli stessi valori sugli attributi $Z$:
+\begin{eqnarray}
+\forall t_1, t_2 \in r, t_1[Y] = t_2[Y] \implies t_1[Z] = t_2[Z]
+\end{eqnarray}
+Una dipendenza funzionale tra gli attributi $Y$ e $Z$ viene indicata con la notazione $Y \rightarrow Z$ e viene associata ad uno schema.\\
+Se l'insieme $Z$ è composto da attributi $A_1, A_2, \ldots, A_k$, allora una relazione soddisfa $Y \rightarrow Z$ se e solo se essa soddisfa tutte le $k$ dipendenze $Y \rightarrow A_1$, $Y \rightarrow A_2$,..., $Y \rightarrow A_k$. Di conseguenza, quando opportuno, possiamo assumere che le dipendenze abbiano la forma $Y \rightarrow A$, con $A$ singolo attributo. \\
+Una relazione funzionale è \textit{non banale} se $A$ non compare tra gli attributi di $Y$. \\
+Data una chiave $K$ di una relazione $r$, si può facilmente notare che esiste una dipendenza funzionale tra $K$ ed ogni altro attributo dello schema di $r$. Quindi una dipendenza funzionale $Y \rightarrow Z$ su uno schema $R(X)$ degenera nel vincolo di chiave se l'unione di $Y$ e $Z$ è pari a $X$. In tal caso $Y$ è superchiave per lo schema $R(X)$ . \\
+Con la notazione $\left\langle R(X), F \right\rangle$ indicheremo uno schema $R(X)$ su cui è definito un insieme di dipendenze funzionali $F$. Un'istanza $r$ di $R(X)$ viene detta \textit{istanza legale} di  $\left\langle R(X), F \right\rangle$ se soddisfa tutte le dipendenze funzionali in $F$. Infine, data una relazione funzionale $Y \rightarrow Z$, se ogni istanza legale $r$ di $\left\langle R(X), F \right\rangle$ soddisfa anche $Y \rightarrow Z$, allora diremo che $F$ \textit{implica logicamente} $Y \rightarrow Z$, indicato come $F \models Y \rightarrow Z$.\\
+
+\subsection{Dipendenze funzionali rilassate}
+In alcuni casi per risolvere dei problemi in alcuni di domini di applicazioni, come l’identificazione di inconsistenze tra i dati, o la rilevazione di relazioni semantiche fra i dati,  è necessario rilassare la definizione di dipendenza funzionale, introducendo delle approssimazioni nel confronto dei dati. Invece di effettuare dei controlli di uguaglianza, si utilizzano dei controlli di similarità.
+Inoltre spesso si potrebbe desiderare che una certa dipendenza valga solo su un sottoinsieme di tuple che su tutte.
+Per questo motivo sono nate delle dipendenze funzionali che rilassano alcuni dei vincoli delle FD, prendono il nome di Dipendenze Funzionali Rilassate o Approssimate \footnote{RFD abbreviazione di Relaxed Functional Dependency.}.
+Esistono differenti tipi di RFD, ciascuna di esse rilassa uno o più vincoli delle FD, si possono dividere in due macro aree:
+\begin{enumerate}
+	\item Confronto di attributi: La funzione di uguaglianza delle FD canoniche viene sostituita da una funzione di similarità, ciò implica che l'AFD deve descrivere una soglia di rilassamento per ogni attributo.
+	\item Estensione: Permette che il vincolo non sia valido su tutte le tuple, ma solo su di un sottoinsieme di esse.
+\end{enumerate}
+Le RFD sono utilizzate in attività di:
+data cleaning, record matching e di rilassamento delle query.
+Le definizione formale di una RFD è la seguente:
+\begin{theorem}
+	Sia $R$ uno schema relazionale definito su di un insieme di attributi finito, e sia $R=(A_1,A_2,...,A_k)$ uno  schema relazionale definito su $R$. Una RFD $\varphi$ su $R$ viene rappresentata come:
+	\\ \\
+	\centerline{$D_{c}:(X)_{\Phi_1} \xrightarrow{\Psi(X,Y)\leq\epsilon}(Y)_{\Phi_2}$}
+	
+	
+	dove: 
+	\begin{itemize}
+		\item $\mathbb{D}_{c} = \{(t)\in dom(R)|(\bigwedge_{i=1}^{k} c_{i}(t[A_i]))$, dove $c=(c_{1},...,c_{k}) $ con $c_{i}$ è un predicato sul $dom(A_i)$, utilizzato per filtrare le tuple a cui $\varphi$ va applicata;
+		
+		\item $X,Y \subseteq attr(R)$  tali che $X\cap Y=0$;
+		
+		\item $\Phi_1$($\Phi_2$ rispettivamente) è un insieme di vincoli $\phi[X](\phi[Y])$ definito sull'attributo $X$ e $(Y$ rispettivamente$)$. Per qualsiasi coppia di tuple $(t_1,t_2) \in \mathbb{D}_{c}$ il vincolo $\phi[X](\phi[Y]$ rispettivamente$)$ restituisce vero se la similarità fra $t_1$ e $t_2$ sugli attributi $X$ e $(Y$ rispettivamente$)$ concordano con i vincoli specificati da $\phi[X](\phi[Y]$ rispettivamente$)$;
+		
+		\item $\Psi:$ rappresenta una misura di copertura su $\mathbb{D}_{c}$ e indica il numero di tuple che violano o soddisfano $\varphi$;
+		
+		\item $\epsilon$ è la soglia che indica il limite superiore o inferiore per il risultato della misura di copertura;
+	\end{itemize}
+\end{theorem}
+Nel lavoro di tesi vengono trattate solo le RFD che rilassano il vincolo di uguaglianza. Data RFD $X \xrightarrow{} Y$ essa vale su una relazione $r$ se e solo se la distanza fra due tuple $t_1$ e $t_2$, i cui valori sui singoli attributi $A_i$ non superano una certa soglia $\beta_i$, è inferiore ad una certa soglia $a_A$ su ogni attributo $A \in X$, allora la distanza fra $t_1$ e $t_2$ su ogni attributo $B \in Y$ è minore di una certa soglia $a_B$.\\
+La struttura delle RFD utilizzate è la seguente:
+\\~\\
+\centerline{$attr_1(\leq soglia_1),\ldots$,$attr_n(\leq soglia_n) \xrightarrow{} RHS$}
+\\~\\
+Gli attributi che si trovano a sinistra della freccia costituiscono la parte LHS\footnote{Left Hand Side o lato sinistro.}, l'attributo che invece si trova dopo la freccia costituisce l'RHS\footnote{Right Hand Side o lato destro.}. 
+È importante focalizzare l'attenzione su questo concetto in quanto le dipendenze funzionali hanno un verso, ed è quello indicato dalla freccia. Qualsiasi operazione effettuata con le RFD deve sempre tener conto del verso, le RFD non forniscono conoscenza nel verso opposto. Questa non è una proprietà riguardante solo le RFD, bensì riguarda qualsiasi tipo di dipendenza funzionale.
+Ad esempio consideriamo la relazione in questa tabella:
+\begin{table}[H]
+	\centering
+	\begin{tabular}{|l |l |l |l |l |}
+		\hline
+		Impiegato & Stipendio & Progetto & Bilancio & Funzione \\
+		\hline
+		Rossi & 20000  & Sito web & 2000 & tecnico\\
+		Verdi & 35000 & App Mobile & 15000 & progettista\\
+		Verdi & 35000 & Server & 15000 & progettista\\
+		Neri & 55000 & Server & 15000 & direttore\\
+		Neri & 55000 & App Mobile & 15000 & consulente\\
+		Neri & 55000 & Sito web & 2000 & consulente\\
+		Mori & 48000 & Sito web & 15000 & direttore\\
+		Mori & 48000 & Server & 15000 & progettista\\
+		Bianchi & 48000 & Server & 15000 & progettista\\
+		Bianchi & 48000 & App Mobile & 15000 & direttore\\
+		\hline
+	\end{tabular}
+	\caption{Esempio di Relazione con anomalie}
+	\label{tab:relationship_anomalies}
+\end{table}
+Si può osservare che lo stipendio di ciascun impiegato è unico, quindi in ogni tupla in cui compare lo stesso impiegato verrà riportato lo stesso stipendio. Possiamo dire che esiste una Dipendenza Funzionale: 
+$Impiegato \xrightarrow{} Stipendio$. 
+Si può fare lo stesso discorso tra gli attributi Progetto e Bilancio, quindi anche qui abbiamo una dipendenza funzionale
+$Progetto\xrightarrow{}Bilancio$. 
+Non si può dire che di conseguenza vale anche il verso opposto:
+\\~\\
+\centerline{$Impiegato \xrightarrow{} Stipendio \neq Stipendio \xrightarrow{} Impiegato$} 
+\\~\\
+Infatti percepiscono 48000 di stipendio sia Mori che Bianchi.\cite{libroCeri}
+\subsection{Scoperta di RFD}
+Data una relazione $r$, la scoperta di una RFD è il problema di trovare un \textit{minimal cover set} di RFD che si verificano per $r$. Questo problema rende ancor più complesso il problema della scoperta delle dipendenze dei dati visto l'ampio spazio di ricerca dei possibili vincoli di similarità. Dunque è necessario trovare algoritmi efficienti in grado di estrarre RFD con vincoli di similarità significativi.\\
+Se i vincoli di similarità e le soglie sono noti per ogni attributo del dataset, scoprire le RFD si riduce a trovare tutte le possibili dipendenze che soddisfano la seguente regola:
+\begin{center}
+	\begin{lemma}
+		Le partizioni di tuple che sono simili sugli attributi contenuti nel lato sinistro o LHS della dipendenza, devono corrispondere a quelle che sono simili nel lato destro o RHS.
+	\end{lemma}
+\end{center}
+Questo problema è simile a trovare le FD, dove bisogna trovare le partizioni di tuple che condividono lo stesso valore sull'RHS quando esse condividono lo stesso valore sull'LHS. Il problema viene reso più semplice dal fatto che, nel caso della scoperta delle FD, tali partizioni sono disgiunte, cosa che però non vale nelle RFD in quanto uno stesso valore può essere simile a valori differenti. Ciò impedisce quindi di sfruttare gli algoritmi utilizzati nella scoperta delle FD, nella scoperta delle RFD
+\subsection{Dominanza}
+Nel corso del nostro lavoro, abbiamo applicato alcuni risultati dell'intelligenza artificiale al campo della discovery delle \textit{Dipendenze Funzionali Rilassate}. In particolare, cercando di individuare le dipendenze funzionali rilassate ci siamo serviti di un importante risultato nella succitata materia: la dominanza stretta \textit{(strict dominance)}.
+
+\begin{theorem} 
+	Dato un vettore di attributi $\mathbf{X} = X_1, X_2, \ldots, X_n $, siano $\mathbf{x} = (x_1, x_2, \ldots, x_n)$ e $\mathbf{y} = (y_1, y_2, \ldots , y_n)$ due vettori di assegnamenti definiti sugli attributi di $\mathbf{X}$, dove l'i-esimo elemento $x_i$ o $y_i$ può essere sia un valore numerico sia un valore discreto con un assunto ordinamento su tali valori. Diremo che $\mathbf{x}$ domina strettamente (o deterministicamente) $\mathbf{y}$ se e solo se $$y_i \leq x_i\;\;\;\;i = 1,2,\ldots,n,$$ ovvero $$\mathbf{y} - \mathbf{x} \leq \mathbf{0}$$
+\end{theorem}
+
+
+

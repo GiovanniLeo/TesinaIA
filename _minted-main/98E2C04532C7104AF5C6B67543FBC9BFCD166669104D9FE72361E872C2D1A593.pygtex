@@ -1,0 +1,31 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{n}{ObjectArrayList}\PYG{o}{\PYGZlt{}}\PYG{n}{Future}\PYG{o}{\PYGZlt{}}\PYG{n}{ObjectArrayList}\PYG{o}{\PYGZlt{}}\PYG{n}{ObjectArrayList}\PYG{o}{\PYGZlt{}}\PYG{n}{String}\PYG{o}{\PYGZgt{}\PYGZgt{}\PYGZgt{}\PYGZgt{}} \PYG{n}{result} \PYG{o}{=}
+                                                  \PYG{k}{new} \PYG{n}{ObjectArrayList}\PYG{o}{\PYGZlt{}\PYGZgt{}();}
+
+\PYG{n}{ObjectArrayList}\PYG{o}{\PYGZlt{}}\PYG{n}{ObjectArrayList}\PYG{o}{\PYGZlt{}}\PYG{n}{String}\PYG{o}{\PYGZgt{}\PYGZgt{}} \PYG{n}{insiemiC} \PYG{o}{=} \PYG{k}{new} \PYG{n}{ObjectArrayList}\PYG{o}{\PYGZlt{}\PYGZgt{}();}
+
+  	\PYG{k}{for}\PYG{o}{(}\PYG{k+kt}{int} \PYG{n}{i}\PYG{o}{=}\PYG{l+m+mi}{0}\PYG{o}{;}\PYG{n}{i}\PYG{o}{\PYGZlt{}}\PYG{n}{colNumber}\PYG{o}{;}\PYG{n}{i}\PYG{o}{++)\PYGZob{}}
+  		\PYG{n}{visitaVettore}\PYG{o}{(}\PYG{n}{vettoreColonna}\PYG{o}{,}\PYG{n}{i}\PYG{o}{,}\PYG{n}{map}\PYG{o}{,}\PYG{n}{debugCode}\PYG{o}{);}
+  		 \PYG{n}{result}\PYG{o}{.}\PYG{n+na}{add}\PYG{o}{(}\PYG{n}{exec}\PYG{o}{.}\PYG{n+na}{submit}\PYG{o}{(}\PYG{k}{new} \PYG{n}{FeasabilityTask}\PYG{o}{(}\PYG{n}{i}\PYG{o}{,} \PYG{n}{colNumber}\PYG{o}{,} \PYG{n}{map}\PYG{o}{,}
+                                  \PYG{n}{vettoreColonna}\PYG{o}{,}\PYG{n}{thresholds}\PYG{o}{[}\PYG{n}{i}\PYG{o}{])));}
+  	\PYG{o}{\PYGZcb{}}
+
+			\PYG{n}{ObjectArrayList}\PYG{o}{\PYGZlt{}}\PYG{n}{Future}\PYG{o}{\PYGZlt{}}\PYG{n}{ObjectArrayList}\PYG{o}{\PYGZlt{}}\PYG{n}{RFDMap}\PYG{o}{\PYGZgt{}\PYGZgt{}\PYGZgt{}} \PYG{n}{resultMinmality} \PYG{o}{=}
+                                                    \PYG{k}{new} \PYG{n}{ObjectArrayList}\PYG{o}{\PYGZlt{}\PYGZgt{}();}
+			\PYG{k}{for}\PYG{o}{(}\PYG{k+kt}{int} \PYG{n}{i}\PYG{o}{=}\PYG{l+m+mi}{0}\PYG{o}{;}\PYG{n}{i}\PYG{o}{\PYGZlt{}}\PYG{n}{colNumber}\PYG{o}{;}\PYG{n}{i}\PYG{o}{++)\PYGZob{}}
+
+				\PYG{n}{insiemiC} \PYG{o}{=} \PYG{n}{result}\PYG{o}{.}\PYG{n+na}{get}\PYG{o}{(}\PYG{n}{i}\PYG{o}{).}\PYG{n+na}{get}\PYG{o}{();}
+
+				\PYG{k}{for}\PYG{o}{(}\PYG{k+kt}{int} \PYG{n}{k}\PYG{o}{=}\PYG{l+m+mi}{0}\PYG{o}{;} \PYG{n}{k}\PYG{o}{\PYGZlt{}}\PYG{n}{insiemiC}\PYG{o}{.}\PYG{n+na}{size}\PYG{o}{();} \PYG{n}{k}\PYG{o}{++)} \PYG{o}{\PYGZob{}}
+					\PYG{n}{ObjectArrayList}\PYG{o}{\PYGZlt{}}\PYG{n}{String}\PYG{o}{\PYGZgt{}} \PYG{n}{insieme} \PYG{o}{=} \PYG{n}{insiemiC}\PYG{o}{.}\PYG{n+na}{get}\PYG{o}{(}\PYG{n}{k}\PYG{o}{);}
+					\PYG{k}{for}\PYG{o}{(}\PYG{k+kt}{int} \PYG{n}{k2}\PYG{o}{=}\PYG{l+m+mi}{0}\PYG{o}{;} \PYG{n}{k2}\PYG{o}{\PYGZlt{}}\PYG{n}{insieme}\PYG{o}{.}\PYG{n+na}{size}\PYG{o}{();} \PYG{n}{k2}\PYG{o}{++)}
+						\PYG{n}{System}\PYG{o}{.}\PYG{n+na}{out}\PYG{o}{.}\PYG{n+na}{println}\PYG{o}{(}\PYG{n}{insieme}\PYG{o}{.}\PYG{n+na}{get}\PYG{o}{(}\PYG{n}{k2}\PYG{o}{));}
+				\PYG{o}{\PYGZcb{}}
+				\PYG{n}{resultMinmality}\PYG{o}{.}\PYG{n+na}{add}\PYG{o}{(}\PYG{n}{exec}\PYG{o}{.}\PYG{n+na}{submit}\PYG{o}{(}\PYG{k}{new} \PYG{n}{MinimalityTask}\PYG{o}{(}\PYG{n}{insiemiC}\PYG{o}{,} \PYG{n}{colNumber}\PYG{o}{,}
+                                          \PYG{n}{i}\PYG{o}{,} \PYG{n}{colNames}\PYG{o}{,} \PYG{n}{thresholds}\PYG{o}{,} \PYG{n}{debugCode}\PYG{o}{)));}
+			\PYG{o}{\PYGZcb{}}
+
+			\PYG{k}{for}\PYG{o}{(}\PYG{k+kt}{int} \PYG{n}{i}\PYG{o}{=}\PYG{l+m+mi}{0}\PYG{o}{;}\PYG{n}{i}\PYG{o}{\PYGZlt{}}\PYG{n}{colNumber}\PYG{o}{;}\PYG{n}{i}\PYG{o}{++)\PYGZob{}}
+				\PYG{n}{listaCC}\PYG{o}{.}\PYG{n+na}{addRFDS}\PYG{o}{(}\PYG{n}{resultMinmality}\PYG{o}{.}\PYG{n+na}{get}\PYG{o}{(}\PYG{n}{i}\PYG{o}{).}\PYG{n+na}{get}\PYG{o}{());}
+			\PYG{o}{\PYGZcb{}}
+\end{Verbatim}

@@ -1,0 +1,180 @@
+
+\section{Feasibility e Minimality}
+La fase di \textit{Feasibility} sottopone i pattern ad un test e restituisce l'insieme dei pattern che li hanno superati. Ce ne sono tanti quanti sono gli RHS. Invece la fase si \textit{Minimality} restituisce in output un certo numero di sotto-pattern minimi.
+\section{Generation}
+\subsection{Nozioni Preliminari}
+L'idea di questa fase è di determinare le soglie ottime per la generazione delle RFD.
+Dalla fase di \textit{Minimality} si otterranno un certo numero di sotto-pattern minimi(ovvero minimali\footnote{Se esiste almeno un sotto-pattern di $S_{k}$ che non è ammissibile} e ammissibili\footnote{Tali pattern non dominano altri pattern.}) i quali possono essere denominati $S_{k}$. In particolare ogni RHS contiene un certo numero di $C_{i}$\footnote{Gli insiemi $C_{i}$ sono l'output della fase di  \textit{Feasibility}.} (con $i=1,\dots,m$)  dove ogni $C_{i}$ contiene un certo numero di pattern $P_{j}$ (con $j = 1,\dots,h$) e per ognuno di questi pattern si otterrà un insieme di $S_{k}$, dalla fase di \textit{Minimality}.
+\subsection{Identificazione di soglie ottime}
+L'idea generale è quella di trovare i più grandi pattern di threshold che non dominano i sotto-pattern minimali in un determinato insieme $C_{i}$. Tali threshold rappresentano soglie ottime per il cluster successivo ($C_{i-1}$) . Per ogni $S_{k}$ ammissibile, l'obiettivo di questa fase è quello di generare soglie ottime.\\
+In particolare una volta trovato un minimo per un cluster, è necessario generare le RFD per il cluster successivo, consideriamo un minimo per un determinato cluster $C_{i}$, una dipendenza valida per il cluster successivo non dovrà raggiungere tale minimo altrimenti la dipendenza verrebbe violata. Infatti la regola generale che indica la validità di una dipendenza $X \rightarrow Y$ è che: presa una qualsiasi coppia dell'istanza $r$ se questa è simile su $X$\footnote{Indica l'LHS} allora deve essere simile anche su $Y$\footnote{Indica l'RHS}. Possiamo distinguere 3 casi.
+\begin{itemize}
+	\item 
+		\textbf{Caso base:} Consideriamo un unico attributo candidato per $X$($|X|= 1$).\\
+		Dato un \textit{clusterID} $k>0$ dell'attributo $A$, se esiste trova il minimo valore $m$ tale che 
+			\begin{equation}
+				m=min(k)<min(prev(k)\footnote{Indica il \textit{clusterID} precedente(in senso decrescente)}) 
+			\end{equation}
+		$(m-\epsilon)$ rappresenta la migliore soglia per il cluster $next(k)$\footnote{Indica il \textit{clusterID} successivo(in senso decrescente)}. Se $m > 0$\footnote{Non avrebbe senso imporre che la soglia sia minore o uguale ad un numero negativo} allora viene generata 
+			\begin{equation}
+			 X_{(\leq m-\epsilon)} \rightarrow A_{(\leq next(k))}
+			\end{equation}
+		Tuttavia durante la ricerca può capitare che un minimo per un \\ \textit{ClusterID}, $m=min(prev(k))$ allora  è necessario effettuare il seguente aggiornamento 
+			\begin{center}
+			$X_{(\leq m-\epsilon)} \rightarrow A_{(\leq k)}$
+			in $ X_{(\leq m-\epsilon)} \rightarrow A_{(\leq next(k))}$
+			\end{center}
+		in altre parole quando esistono più RFD sullo stesso LHS è necessario mantenere quella con RHS minore.\\
+		\import{Capitoli/Capitolo3/Sezioni/Esempi/}{esempioCaso1}
+	\item 
+		\textbf{Caso con $|X|=2$:} Dato un \textit{clusterID} $k>0$ dell'attributo $A$, se esiste trova le coppie $(m_{1},m_{2})$ non dominanti rispetto all'insieme di tuple \\$S=nonDominating(k)$, quindi
+		$(m_{1}-\epsilon,\alpha_{2})$ e $(\alpha_{1},m_{2}-\epsilon)$ rappresentano le possibili soglie da generare per il cluster $next(k)$.\\
+		In particolare se $m_{1}>0$ genera
+			\begin{equation}
+			X_{1_{(\leq m_{1}-\epsilon)}} X_{2_{(\leq \alpha_{2})}}\rightarrow A_{(\leq next(k))}
+			\end{equation}
+		invece,
+		se $m_{2}>0$ genera
+			\begin{equation}
+			X_{1_{(\leq \alpha_{2})}} X_{2_{(\leq m_{2}-\epsilon)}}\rightarrow A_{(\leq next(k))}
+			\end{equation}
+		il tutto è possibile se $\alpha_{j}$(in questo caso $j=1,2$) esiste. A questo è necessario determinare $\alpha_{j}$ per un $X_{j}$ di cui viene fatto il dicovery secondo $m_{i}$ di $X_{i}$ ($j=1,2$, $i=1,2$ )per un dato sotto-pattern di distanza  $t$.
+		In particolare $t$ rappresenta il risultato della proiezione di $P_{j}$ su $S_{k}$($\prod_{S_{k}}P_{j}$)\\
+		Consideriamo un insieme di pattern di tuple non dominanti $S=t_{1},\dots,t_{n}$ con $t_{l}\neq t$ per $l=1,\dots,n$.\\
+		Se esiste, trova il minimo valore $p_{j}$ del pattern di tuple $t_{l}$ tale che
+			\begin{enumerate}
+				\item  $m_{j}<p_{j}$, e
+				\item $m_{i-\epsilon} \geq p_{i}$ con $p_{i}=t_{l}[X_{i}]$
+			\end{enumerate}  
+		e genera $\alpha_{j}= p_{j} -\epsilon$.\\ In altre parole $p_{j}$ è il minimo valore fra tutti quelli dominati da $m_{i-\epsilon}$
+		\import{Capitoli/Capitolo3/Sezioni/Esempi/}{esempioCaso2}
+		\item 
+			\textbf{Caso con $|X|=n$:} Dato un \textit{clusterID} $k>0$ dell'attributo $A$, se esistono trova le tuple $(m_{1},\dots,m_{n})$ non dominanti rispetto all'insieme di tuple \\$S=nonDominating(k$ and $prev(k))$, quindi $(\alpha_{1},\dots,\alpha_{i-1},m_{i-\epsilon},\alpha_{i+1},\dots,\alpha_{n})$ rappresenta una delle migliori soglie per il cluster $next(k)$ per ogni $i=1,\dots,n$.  \\
+			Se $m_{i} >0$ genera
+			\begin{equation*}
+				X_{1_{(\leq \alpha_{1})}},\dots,X_{i-1_{(\leq \alpha_{i-1})}},X_{i_{(\leq m_{i-\epsilon})}},X_{i+1_{(\leq \alpha_{i+1})}},\dots,X_{n_{(\leq \alpha_{n})}} \rightarrow A_{(\leq next(k))}
+			\end{equation*}
+			il tutto è possibile come nel caso precedente se tutti gli $\alpha_{j}$ esistono.Questo caso è molto particolare poiché per determinare gli $\alpha_{j}$( $j=1,\dots,n$, $j\neq i$) dobbiamo distinguere due sotto casi:
+				\begin{enumerate}
+				\item  \textbf{Caso 1:} Se $(m_{1},\dots,m_{i-1},m_{i+1},\dots,m_{n})$ è un pattern dominante.
+					Consideriamo tutti i pattern di tuple non dominanti $t_{l}$ con $t_{l}\neq t$ per $l=1,\dots,n$.\\
+				Se esiste, trova il minimo valore $p_{j}$ del pattern di tuple $t_{l}$ tale che
+				\begin{enumerate}
+					\item  $m_{j}<p_{j}$, 
+					\item $m_{i-\epsilon} \geq p_{i}$ con $p_{i}=t_{l}[X_{i}]$
+					\item $\alpha_{k} \geq p_{i}$ per ogni $k \in [0,j-1]$ e $k \neq i$
+					\item $m_{k'} \geq p_{k'}$ per ogni $k' \in [j+1,n]$ e $k' \neq i$
+				\end{enumerate}  
+				e genera $\alpha_{j}= p_{j} -\epsilon$.\\
+				 
+				\item  \textbf{Caso 2:} Se $(m_{1},\dots,m_{i-1},m_{i+1},\dots,m_{n})$ è un pattern non dominante ovvero tale pattern è ammissibile.
+				Consideriamo tutti i pattern di tuple non dominanti $t_{l}$ con $t_{l}\neq t$ per $l=1,\dots,n$.\\
+				Se esiste, trova il minimo valore $p_{j}$ del pattern di tuple $t_{l}$ tale che
+				\begin{enumerate}
+					\item  $m_{j}<p_{j}$, 
+					\item $m_{i-\epsilon} \geq p_{i}$ con $p_{i}=t_{l}[X_{i}]$
+					\item $\alpha_{k} \geq p_{i}$ per ogni $k \in [0,j-1]$ e $k \neq i$
+					\item $\exists m_{k'} \geq p_{k'}$ con $k' \in [j+1,n]$ e $k' \neq i$
+				\end{enumerate}  
+				e genera $\alpha_{j}= p_{j} -\epsilon$.\\ 
+			\end{enumerate}  		
+\end{itemize}
+
+\subsection{Generazione di RFD}
+Sapendo di avere a disposizione un insieme di sotto-pattern minimali $S_{k}$, tali $S_{k}$ sono ottenuti dalla fase precedete(\textit{Minimality}). Inoltre $S_{k}$ si riferisce ad un insieme di attributi $(A_{1},\dots,A_{k})$ \\
+Per ogni $S_{k}$, una volta determinate le RFD thresholds per $S_{k}$(ovvero tutte le possibili dipendenze). L'algoritmo valuta i \textit{Superset} di $S_{k}$, ovvero consideriamo $((A_{1},\dots,A_{k}),A_{h})$ tale che $A_{h} \neq A_{1},\dots,A_{k}$ e prova il \textit{Superset}.\\ 
+L'algoritmo per provare il \textit{Superset} deve sostanzialmente fare 3 steps:
+\begin{enumerate}
+	\item Verifica se è ammissibile, in caso posistivo si va avanti e in caso contrario non si va avanti.
+	\item Genera le RFD partendo dal pattern ammissibile. 
+	\item Se nello step precedente abbiamo generato almeno una RFD  allora è utile considerare anche il \textit{Superset} di questo pattern considerato, ovvero $((A_{1},\dots,A_{k}),A_{h},A_{i})$ con $A_{h},A_{i} \neq A_{1},\dots,A_{k}$.
+\end{enumerate}
+Tale algoritmo si ferma quando non riesce a generare più RFD.
+Di seguito mostriamo gli pseudo-codici che riguardano l'algoritmo appena descritto. 
+
+\begin{algorithm}
+	\caption{FindMinimum(Set \textbf{C}, int $\pmb{m_{i}}$, pattern tuple  $\pmb{S_{k}}$, column \textbf{i}, column \textbf{j}, List $\pmb{\alpha}$, column combination \textbf{\textit{cc}})}\label{FindMinimum}
+	\begin{algorithmic}[1]
+	\State \textbf{\textit{min}} $\gets$ -1
+	\State int $\pmb{p_{j}}$
+	\State subPattern $\pmb{S_{l}}$
+	\State $\pmb{S_{k'}} \gets$ null
+	\State column combination \textbf{\textit{subCC}}
+	\State boolean \textbf{\textit{exist }} $\gets$ false
+	
+	\State \textbf{\textit{subCC}} $\gets$ \textbf{\textit{cc}}.GetPatterCombinationWithout(\textbf{\textit{i}})
+	\State  $\pmb{S_{k'}} \gets$ $\pmb{t_{l}}$.GetPattern(\textbf{\textit{subCC}})
+		\If{$\pmb{S_{k'}}$.IsNonDominatingPattern()}
+			\State \textbf{\textit{exist }} $\gets$ true
+		\EndIf
+			\For{\textbf{each} pattern tuple $\pmb{t_{l}}$ in \textbf{\textit{C}} with $\pmb{t_{l}}$ != $\pmb{t_{p}}$ }
+				\State $\pmb{s_{l}} \gets$ $\pmb{t_{l}}$.GetPattern(\textbf{\textit{cc}})
+				\State $\pmb{p_{j}} \gets$ $\pmb{s_{l}}$.GetElement(\textbf{\textit{j}})
+				\If{\textbf{\textit{exist}} = true \&\& (\textbf{\textit{min}} != -1 || \textbf{\textit{min}}$>\pmb{p_{j}}$)}
+					\If{VerifyPropiertiesWithExist($\pmb{S_{k}}$, $\pmb{S_{l}}$, \textbf{\textit{i}}, \textbf{\textit{j}}, $\pmb{\alpha}$) = true}
+					\State \textbf{\textit{min}} $\gets$ $\pmb{p_{j}}$
+					\ElsIf{VerifyPropierties($\pmb{S_{k}}$, $\pmb{S_{l}}$, \textbf{\textit{i}}, \textbf{\textit{j}}, $\pmb{\alpha}$) =  true}
+						\State \textbf{\textit{min}} $\gets$ $\pmb{p_{j}}$
+					\EndIf
+					\State	\textbf{\textit{exist}} = true
+ 				\EndIf
+			\EndFor
+	\end{algorithmic}
+\end{algorithm}
+
+\begin{algorithm}
+	\caption{RFD Generation(Set \textbf{C}, pattern tuple  $\pmb{t_{p}}$, Set \textbf{results}, Set \textbf{*rfd})}\label{RFD_Generation}
+	\begin{algorithmic}[1]
+		\State subPattern $\pmb{S_{k}} \gets$ null
+		\State List $\pmb{definedThresholds } \gets$ null
+		\State int\textit{\textbf{ minThreshold}}
+		\State rfd \textit{\textbf{newRFD}}
+		\State column combination[ ] $\pmb{super} \gets$ null
+		\State boolean \textit{\textbf{admissible}}
+		\State boolean \textit{\textbf{superset}}
+		\For{\textbf{each} column combination \textit{\textbf{cc}} in \textit{\textbf{results}}}
+			\State $\pmb{S_{k}} \gets \pmb{t_{p}.}$GetPattern(\textbf{\textit{cc}})
+			\State \textbf{\textit{superset}} $\gets$ false
+		
+			\For{\textbf{each} column \textbf{\textit{i}} in $\pmb{S_{k}}$}
+				\State $\pmb{m_{i}}\gets  \pmb{t_{p}.}$GetElement(\textbf{\textit{i}}) 
+				\State \textbf{\textit{admissible }} $\gets$ true
+				\If{$\pmb{m_{i}}>0$}
+						\For{\textbf{each} column \textbf{\textit{j}} in $\pmb{S_{k}}$}
+							\If{\textbf{\textit{j}} = \textbf{\textit{i}}}
+								\State \textbf{\textit{definedThresholds}}.Add(\textbf{\textit{j}},$\pmb{m_{i}}-1$)
+								\Else
+									\State \textbf{\textit{minThresholds}}.FindMinimum(\textbf{\textit{C}},$\pmb{m_{i}}$,$\pmb{S_{k}}$,\textbf{\textit{j}},\textbf{\textit{definedThresholds}})
+									\If{\textbf{\textit{minThresholds}} != -1}
+										\State	\textit{\textbf{definedThresholds}}.Add(\textbf{\textit{j}},\textbf{\textit{minThresholds }}-1)
+										\Else
+											\State \textbf{\textit{admissible }} $\gets$ false
+											\State \textbf{\textit{break}}		
+									\EndIf
+							\EndIf
+						\EndFor
+						\If{\textbf{\textit{admissible }} = true}
+							\State \textbf{\textit{newRFD }} $\gets$ CreateRFD(\textbf{\textit{definedThresholds}}.GetNext(\textbf{\textit{C}}))
+							\If{\textbf{\textit{rfd}}.Contains(\textbf{\textit{definedThresholds}}) = true}
+								\State \textbf{\textit{rfd}}.RemoveRFDsOf(\textbf{\textit{definedThresholds}})
+							\EndIf
+							\State \textbf{\textit{rfd}}.Add(\textbf{\textit{newRFD}})
+							\State \textbf{\textit{superset}} = true
+						\EndIf
+				\EndIf
+	 		\EndFor
+	 		\If{\textbf{\textit{superset}} = true}
+	 			\State \textbf{\textit{super}} $\gets$ true
+	 			\State $\pmb{t_{p}}$.GetNonDominatingSuperPattern(\textbf{\textit{cc}})
+	 			\If{\textbf{\textit{super}} != null}
+	 				\For{\textbf{each} column  combination \textbf{\textit{cc'}} in \textbf{\textit{super}}}
+	 					\State \textbf{\textit{results}}.Add(\textbf{\textit{cc'}})
+	 				\EndFor
+	 			\EndIf
+	 		\EndIf	
+		\EndFor
+	
+	\end{algorithmic}
+\end{algorithm}
+
+

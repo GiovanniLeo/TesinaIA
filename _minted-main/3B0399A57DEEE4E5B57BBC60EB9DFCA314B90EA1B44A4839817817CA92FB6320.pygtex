@@ -1,0 +1,17 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{c+cm}{/**}
+\PYG{c+cm}{ * Metodo che riceve in input nome del file csv e lo carica }
+\PYG{c+cm}{ * in un DataFrame}
+\PYG{c+cm}{ * @param nameCSV nome file CSV}
+\PYG{c+cm}{ * @param separator separatore di colonne utilizzato nel file}
+\PYG{c+cm}{ * @param naString stringa nulla}
+\PYG{c+cm}{ * @param hasHeader presenza di header nel file}
+\PYG{c+cm}{ * @return Dataframe  DataFrame caricato da file}
+\PYG{c+cm}{ * @throws IOException}
+\PYG{c+cm}{ */}
+ \PYG{k+kd}{public} \PYG{k+kd}{static} \PYG{n}{DataFrame}\PYG{o}{\PYGZlt{}}\PYG{n}{Object}\PYG{o}{\PYGZgt{}} \PYG{n+nf}{loadDF}\PYG{o}{(}\PYG{n}{String} \PYG{n}{nameCSV}\PYG{o}{,}
+ 										\PYG{n}{String} \PYG{n}{separator}\PYG{o}{,}
+                                        \PYG{n}{String} \PYG{n}{naString}\PYG{o}{,}
+                                        \PYG{k+kt}{boolean} \PYG{n}{hasHeader}\PYG{o}{,}
+                                        \PYG{k+kt}{int} \PYG{n}{righeTaglio}\PYG{o}{)}
+\end{Verbatim}

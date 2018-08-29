@@ -1,0 +1,16 @@
+\section{Incipit}
+Nella progettazione di una base di dati ci sono aspetti essenziali da prendere in considerazione per assicurare un servizio quanto più efficiente possibile.
+Uno di questi servizi è certamente la \emph{qualità dei dati}, una base di dati con questa caratteristica farà si che le inconsistenze tra i dati siano il minor numero possibile.
+Negli ultimi anni la crescita delle reti ha portato ad un aumento considerevole del flusso di dati  rendendo la \emph{data quality} una materia estremamente interessante vista la cospicua presenza di dati ``sporchi" proveniente da fonti differenti.
+Per ridurre questo tipo di anomalie è impensabile tentare di eliminare le \emph{inconsistenze} manualmente,  una procedura di questo tipo può essere facilmente incline ad errori sopratutto con la quantità di dati precedentemente citata.
+In questo lavoro ci vengono incontro le \emph{Dipendenze funzionali}, utilizzate ampiamente per stabilire vincoli di integrità tra i dati e ridurre anomalie e inconsistenze all'interno della nostra base di dati.
+La grande mole di dati, però, ha reso necessario un riadattamento delle dipendenze funzionali rendendole in grado di catturare inconsistenze più ampie nei dati. 
+Le \emph{Dipendenze funzionali rilassate o approssimate} \textbf{(RFD)} sono da considerarsi come una naturale evoluzione o generalizzazione delle \emph{dipendenze funzionali canoniche}.
+Questo nuovo strumento ci permette di adattare le semplici dipendenze funzionali a diversi contesti applicativi, infatti, le RFD possono applicarsi anche solo ad una porzione di database.
+Il concetto più importante introdotto dalle RFD è quello della \emph{similarità}.
+Nelle dipendenze funzionali classiche esisteva soltanto il concetto di uguaglianza tra dati, nelle RFD espandiamo questo concetto ad una similarità, questo ci permetterà di coprire una quantità di dati maggiore.
+Tuttavia le RFD possono fornire vantaggi solo se possono essere scoperte automaticamente dai dati.
+Il lavoro di tesi si è basato su questo ultimo concetto di ottenere le RFD in seguito ad una procedura automatizzata.
+Durante le varie fasi di studio si è pensato ed implementato un algoritmo che permette, attraverso tre fasi intermedie, la scoperta di RFD di un dataset dato come input.
+Le tre fasi di questo algoritmo sono: \emph{Feasibility, Minimality, Generation}.
+Per questo algoritmo, particolare attenzione è stata posta sull'efficienza, oltre che sull'efficacia, studiando un'implementazione basata sul multithreading e predisponendola ad eventuale adattamento parallelo.

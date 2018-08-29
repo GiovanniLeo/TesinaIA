@@ -1,0 +1,12 @@
+Esistono svariati metodi per scoprire le RFD data una determinata soglia $\epsilon$, un esempio è il metodo \textit{top-down}.\\
+I metodi di discovery \textit{top-down} effettuano una generazione di possibili FD livello per livello e controllano se queste si verificano. L'algoritmo inizia generando un grafo di attributi, con una struttura a lattice, dove vengono considerati tutti i possibili sottoinsiemi di attributi. Dato uno schema relazionale $R = (A_1, A_2, \cdots, A_n)$, il livello 0 del lattice non contiene nessun attributo, il livello 1 contiene tutti i singleton dei singoli attributi dello schema relazionale $R$, il livello due tutte le possibili coppie di attributi in $R$ fino ad arrivare all'ultimo livello, l'n-esimo, che contiene un unico insieme con tutti gli attributi di $R$ al suo interno. Ogni sottoinsieme contenuto nel lattice rappresenta un candidato per una possibile FD.\\
+Generato il lattice, l'algoritmo parte dal livello 0 fino ad arrivare all'ultimo, e per ogni livello verifica, per tutti i possibili sottoinsiemi $X \in L_r$\footnote{livello r-esimo}, l'esistenza di possibili dipendenze funzionali. Nello specifico, per ogni attributo $A \in X$ si cerca di verificare se la FD $X \setminus \{A\} \rightarrow A$ vale. Per ridurre il tempo di esecuzione esponenziale, assieme alla verifica avviene una potatura del grafo sfruttando la scoperta di nuove FD.\\
+Inoltre negli ultimi anni c'è stata una proliferazione delle RFDs di cui solo alcune di loro erano dotate dell'algoritmo per la scoperta dai dati. Mostriamo adesso alcune di esse\cite{onDiscovery}.
+
+
+\section{AFD Discovery}
+\import{Capitoli/Capitolo2/Sezioni/}{AFDdiscovery}
+\section{MD Discovery}
+\import{Capitoli/Capitolo2/Sezioni/}{MDdiscovery}
+\section{DD Discovery}
+\import{Capitoli/Capitolo2/Sezioni/}{DDdiscovery}

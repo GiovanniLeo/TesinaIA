@@ -1,0 +1,63 @@
+\section{Matrice delle distanze}
+Il primo passo consiste nel calcolo delle distanze tra ogni coppia di tuple del dataset. Questo passaggio viene fatto utilizzando diverse funzioni di distanza, a seconda del tipo di RFD che si vuole ricavare.
+\subsection{Funzione di distanza}
+Date due tuple $t_i$ e $t_j$ tali che $t_i, t_j \in \mathbf{r}$, risulta necessario definire un metodo per capire quanto queste siano distanti tra di loro. Definiamo quindi una funzione 
+$$ \mathbf{d}: \mathbf{r} \rightarrow \mathbb{R}^{k+1} $$
+tale che, date due tuple $t_i , t_j \in \mathbf{r}$, 
+$$ \mathbf{d}(t_i, t_j) = [(d_1, d_2,..., d_{k+1}) \mid d_p = d(t_i[p], t_j[p])  ], $$
+dove $t_i[p]$ rappresenta il p-esimo elemento della tupla $t_i$ e $d(x,y)$ è una funzione di distanza tra gli elementi $x$ e $y$ che cambia in base al tipo di elemento. \\
+Una funzione $\mathbf{d}(t_i, t_j)$ può quindi essere ibrida, ossia composta da diverse distanze su attributi di tipi diversi: per confrontare tuple composte da valori misti (e.g. numerici, stringhe e date) è necessario utilizzare diverse distanze. Quindi, una generica funzione distanza $\mathbf{d}$ operante su due tuple, è composta al suo interno da altre funzioni di distanza $d_{t}$, anche diverse tra di loro, operanti su singoli attributi.\\
+Durante la progettazione del nostro algoritmo abbiamo considerato le seguenti funzioni distanza, in base ai diversi tipi di elemento che potevano far parte di una tupla:
+\paragraph{Distanza euclidea mono-dimensionale} tale funzione viene utilizzata quando $x$ e $y$ sono entrambi tipi numerici:
+\begin{equation}
+	d_{eucl}(x,y) = \sqrt[]{(x-y)^{2}} = |x - y|.
+\end{equation}
+\paragraph{Distanza di Levenshtein} è una metrica per misurare la differenza fra due stringhe (o sequenze in generale). Tale distanza indica il minimo numero di caratteri singoli che è necessario modificare (e.g. inserimenti, cancellazioni, sostituzioni) per far sì che le due stringhe siano uguali. È quindi definita come:
+\begin{equation}
+	d_{lev}(x,y) = lev_{x,y}(|x|,|y|)
+\end{equation}
+dove 
+$$lev_{a,b}(i,j) = 
+\begin{cases}
+	\max(i,j) & \text{se}\ min(i,j) = 0 \\
+    \min{ 
+    	\begin{cases}
+    		lev_{a,b}(i-1,j) + 1 \\
+           	lev_{a,b}(i,j-1) + 1 \\
+            lev_{a,b}(i-1,j-1) + 1_{(a_i \neq b_j)}
+    	\end{cases}} & \text{altrimenti}
+\end{cases}
+$$
+dove $1_{(a_i \neq b_j)}$ è una \textit{funzione indicatrice}, uguale a 0 se $a_i = b_j$ e uguale a 1 altrimenti, e $lev_{a,b}(i,j)$ è la distanza di Levenshtein  tra i primi $i$ caratteri di $a$ e i primi $j$ caratteri di $b$;
+\paragraph{Distanza tra date} quando gli attributi da confrontare sono di tipo data (a prescindere dal formato di questa), viene utilzzata una semplice funzione di distanza che permette di calcolare i giorni trascorsi dalla data meno recente a quella più recente. 
+\subsection{Calcolo della matrice delle distanze}
+Dal confronto tra tutte le coppie di tuple della relazione ricaviamo una tabella delle distanze $DT$ tale che $|DT| = \binom{n}{2} = \frac{n(n-1)}{2}$.  \\ 
+La tabella delle distanze (supponendo senza perdere di generalità di utilizzare l'attributo $X_{k+1}$ come attributo RHS) ricavata è quindi:
+\begin{center}
+	\begin{tabular}{l|l|llll}
+		{} &  $RHS$ & $X_1$ &   $X_2$ &  $\ldots$ &   $X_k$ \\
+		1 & $d^{RHS}_1$ & $d_{11}$ &  $d_{12}$ &  $\ldots$ &  $d_{1k}$ \\
+		2 & $d^{RHS}_2$ & $d_{21}$ &  $d_{22}$ &  $\ldots$ &  $d_{2k}$ \\
+		\vdots & \vdots & \vdots &  \vdots &  $\ddots$ &  \vdots \\
+		m & $d^{RHS}_m$ &  $d_{m1}$ &  $d_{m2}$ &  \ldots &  $d_{mk}$ \\
+	\end{tabular} \\
+\end{center}
+dove $m = \frac{n(n-1)}{2}$ e ogni riga rappresenta il vettore distanza ottenuto confrontando due diverse tuple facenti parte della relazione, ad esempio, date due tuple $t_r = (x_1, x_2, \ldots, x_{k+1})$ e $t_l = (y_1, y_2, \ldots, y_{k+1})$ tali che $t_r \in \mathbf{r}$ e $t_l \in \mathbf{r}$, calcoliamo la distanza tra queste due tuple e poniamo il vettore 
+$$d(t_r,t_l) = [d(x_1, y_1), d(x_2, y_2), \ldots, d(x_{k+1}, y_{k+1})]$$
+in $DT[i]$. Il generico $d_{ij}$ rappresenta la distanza sull'attributo $X_i$ calcolato su una coppia di tuple. \\
+La colonna 
+$$DT[\cdot]['RHS'] = {d_1^{RHS} \\ d_2^{RHS} \\ \vdots \\ d_m^{RHS}}$$
+rappresenta la colonna delle distanze tra tutte le $n$ tuple rispetto all'attributo RHS. \\ \\
+Dopo aver calcolato la tabella $DT$, occorre ordinarla utilizzando come pivot la colonna $DT[\cdot]['RHS']$, ottenendo il seguente data frame: \\
+\begin{center}
+	\begin{tabular}{l|l|llll}
+		{} &  $RHS$ & $X_1$ &   $X_2$ &  $\ldots$ &   $X_k$ \\
+		1 & $d^{RHS}_i$ & $d_{i1}$ &  $d_{i2}$ &  $\ldots$ &  $d_{ik}$ \\
+		2 & $d^{RHS}_j$ & $d_{j1}$ &  $d_{j2}$ &  $\ldots$ &  $d_{jk}$ \\
+		\vdots & \vdots & \vdots &  \vdots &  $\ddots$ &  \vdots \\
+		m & $d^{RHS}_r$ &  $d_{r1}$ &  $d_{r2}$ &  \ldots &  $d_{rk}$ \\
+	\end{tabular} \\
+\end{center}
+dove $d^{RHS}_i \leq d^{RHS}_j \leq \ldots \leq d^{RHS}_r$. \\
+A questo punto occorre dividere e raggruppare tutte le righe del data frame: le righe aventi lo stesso valore(\textit{ClusterID}) sulla colonna $DT[\cdot]['RHS']$ saranno raggruppate in sezioni di data frame disgiunte. 
+Questo data frame finale può finalmente essere utilizzato dalle successive fasi dell'algoritmo.

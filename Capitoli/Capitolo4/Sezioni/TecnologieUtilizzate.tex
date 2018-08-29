@@ -1,0 +1,28 @@
+\section{Tecnologie utilizzate}
+Al fine di testare l'algoritmo progettato, abbiamo sviluppato una applicazione scritta in Java.
+La scelta nell'utilizzare Java, come detto negli studi preliminari, è nata dalla necessità di ottenere maggiori prestazioni, dalla potenza del linguaggio e dal gran numero di librerie e framework utilizzabili al nostro scopo.
+Nella seguente sezione analizzeremo quelle che sono le librerie utilizzate per la realizzazione del seguente progetto.
+\subsection{Executor Service}
+In Java ci sono servizi molto evoluti denominati \textbf{Executor Service}, un framework che semplifica l'esecuzione di task in maniera asincrona. Generalmente parlando l'\textit{ExecutorService} fornisce automaticamente un pool di thread e un API per assegnare task ad esso.
+La maniera più semplice per creare un \textit{ExecutorService} è utilizzare uno dei metodi della classe \textbf{Executors}. Tra i differenti metodi che essa offre sono stati utilizzati
+\begin{itemize}
+	\item \textbf{Executors.newFixedThreadPool(1)} per l'esecuzione dell'algoritmo in sequenziale.
+	\item  \textbf{Executors.newCachedThreadPool()} per l'esecuzuine dell'algoritmo in parallelo.
+\end{itemize}
+\textbf{ExecutorService} può eseguire dei task di tipo \textbf{Runnable}\footnote{Non restituiscono nessun oggetto} e \textbf{Callable<T>}\footnote{Restituiscono un oggetto di tipo T} attraverso il metodo \textbf{submit()} il quale restituisce un risultato di tipo\\ \textbf{Future<T>} se viene fatto il submit di un task di tipo \textbf{Callable<T>} oppure un risultato del tipo \textbf{Future<?>} se viene fatto il submit di un task di tipo \textbf{Runnable}. L'oggetto di tipo \textbf{Future} è una interfaccia che fornisce un metodo \textbf{get()}, il quale permette di ottenere il risultato del task, ed esso è bloccante se il risultato non è ancora pronto altrimenti ritorna subito.
+Per questa tecnologia si può fare riferimento alla documentazione ufficiale: \url{https://goo.gl/xTEGZa}
+ 
+\subsubsection{CachedThreadPool}
+Crea un pool di thread espandibile. Nuovi thread vengono creati quando è necessario ed i thread precedentemente creati vengono riutilizzati quando sono disponibili. I thread in Idle vengono mantenuti nel pool per un certo periodo di tempo, questo è il meccanismo più standard per accomodare i picchi di carico. Inoltre nel momento in cui si ha carico abbastanza prevedibile la \textbf{CachedThreadPoolSize}\footnote{Il numero di thread presenti nel pool.} rimane fissa.
+\subsubsection{FixedThreadPool}
+Crea un pool di thread a dimensione fissa. Questo pool garantisce che non ci siano più di un certo numero di thread concorrenti. Se viene sottomesso un task e tutti i thread sono in esecuzione, quest'ultimo aspetterà che qualche thread diventi disponibile per essere eseguito.
+
+\subsection{MapDB}
+MapDB è un open-source (Apache 2.0 licensed), embedded Java database engine e collection framework. Fornisce Maps, Sets, Lists, Queues, Bitmaps.
+MapDB è probabilmente il database Java più veloce, con prestazioni paragonabili alle collezioni java.util. Fornisce inoltre funzionalità avanzate come transazioni ACID, istantanee, backup incrementali e molto altro.
+Per questa tecnologia si può fare riferimento alla documentazione ufficiale: \url{https://jankotek.gitbooks.io/mapdb/content/}
+\subsection{FastUtil}
+Fornisce una implementazione più efficiente delle pricipali strutture dati di java. Si può fare riferimento a tale libreria sulla documentazione ufficiale: \url{http://fastutil.di.unimi.it/}.
+\subsection{Joinery Dataframe}
+Il DataFrame di joinery è una struttura dati simile a dataframe presente nella libreria \emph{pandas} del linguaggio Python. Si può fare riferimento a tale libreria sulla documentazione ufficiale: \url{https://cardillo.github.io/joinery/}.
+

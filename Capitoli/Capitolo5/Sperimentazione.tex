@@ -1,0 +1,71 @@
+\section{Test}
+Tutti i test sono stati eseguiti su una macchina con sistema operativo windows 10, un processore Intel Core i7 4750HQ a 2.0GHz e con 12Gb di RAM DDR3.\\
+Per ogni dataset utilizzato abbiamo testato l'algoritmo tramite la classe \textbf{Domino.java} descritto nel capitolo di implementazione, ricavando così i tempi impiegati su ciascun dataset, provando ogni possibile colonna come RHS e le restanti colonne come LHS.  \\
+
+Mostreremo quelli che sono i test ritenuti rilevanti:
+\begin{itemize}
+	\item Test in sequenziale con \textbf{FixedThreadPoo};
+	\item Test in parallelo con \textbf{CachedTreadPool};
+\end{itemize}
+\subsection{Dataset utilizzati}
+Oltre ad una serie di dataset creati appositamente per verificare la correttezza di alcune operazioni, abbiamo prelevato una serie di dataset dal sito dell'Information Systems Group dell'Hasso-Plattner-Institut \cite{metanome}: un un gruppo di ricerca della suddetta Università tedesca che si occupa, tra le altre cose, di progettare algoritmi dedicati alla ricerca delle dipendenze funzionali. Su tale sito, oltre a poter consultare gli algoritmi sviluppati, è possibile accedere a tutti i dataset sui quali tali algoritmi sono stati testati corredati a varie informazioni (i.e. fonte, numeri di attributi, numero di righe, dipendenze funzionali trovate, dipendenze funzionali ordinate trovate ecc).\\
+\begin{table}[H]
+	\centering
+	\begin{tabular}{|c|c|c|c|}
+		\hline 
+		\textbf{Dataset} & \textbf{Colonne} & \textbf{Righe}  & \textbf{Size [KB]} \\ 
+		\hline 
+		Foodstamp.csv & 4  & 150 & 3 \\ 
+		\hline 
+		Emissions.csv& 4 & 8088 &479  \\ 
+		\hline 
+		Vocab.csv& 4 & 21638 &530  \\ 
+		\hline 
+		Iris.csv& 5 &  150&5  \\ 
+		\hline 
+		Car.csv&7  &  1728&51  \\ 
+		\hline 
+		Chess.csv&7  &28056  &519  \\ 
+		\hline 
+		Breast-Cancer.csv& 11 & 699  & 20  \\ 
+		\hline 
+		Bridges.csv& 13 & 108 &  6\\ 
+		\hline 
+		Echocardiogram.csv& 13 & 132 & 6 \\ 
+		\hline 
+	\end{tabular}
+	\caption{Dataset utilizzati}
+	\label{tab:Dataset utilizzati}
+\end{table}
+
+\subsection{Tempi}
+
+\begin{table}[H]
+	\centering
+	\begin{tabular}{|c|c|c|c|}
+		\hline 
+		\textbf{Dataset} & \textbf{Tempo in sequenziale} & \textbf{Tempo in parallelo} \\ 
+		\hline 
+		Foodstamp.csv & 4  & 150  \\ 
+		\hline 
+		Emissions.csv& 4 & 8088   \\ 
+		\hline 
+		Vocab.csv& 4 & 21638   \\ 
+		\hline 
+		Iris.csv& 5 &  150  \\ 
+		\hline 
+		Car.csv&7  &  1728 \\ 
+		\hline 
+		Chess.csv&7  &28056   \\ 
+		\hline 
+		Breast-Cancer.csv& 11 & 699   \\ 
+		\hline 
+		Bridges.csv& 13 & 108 \\ 
+		\hline 
+		Echocardiogram.csv& 13 & 132  \\ 
+		\hline 
+	\end{tabular}
+	\caption{Tempi}
+	\label{tab:Tempi}
+\end{table}
+

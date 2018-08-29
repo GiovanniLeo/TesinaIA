@@ -1,0 +1,26 @@
+\newcommand*\HUGE{\Huge}
+\newcommand*\chapnamefont{\normalfont\LARGE\MakeUppercase}
+\newcommand*\chapnumfont{\normalfont\HUGE}
+\newcommand*\chaptitlefont{\normalfont\HUGE\bfseries}
+
+\newlength\beforechapskip
+\newlength\midchapskip
+\setlength\midchapskip{\paperwidth}
+\addtolength\midchapskip{-\textwidth}
+\addtolength\midchapskip{-\oddsidemargin}
+\addtolength\midchapskip{-1in}
+\setlength\beforechapskip{18mm}
+
+\titleformat{\chapter}[display]
+{\normalfont\filleft}
+{{\chapnamefont\chaptertitlename}%
+	\makebox[0pt][l]{\hspace{.8em}%
+		\resizebox{!}{\beforechapskip}{\chapnumfont\thechapter}%
+		\hspace{.8em}%
+		\rule{\midchapskip}{\beforechapskip}%
+	}%
+}%
+{25pt}
+{\chaptitlefont}
+\titlespacing*{\chapter}
+{0pt}{40pt}{40pt}
