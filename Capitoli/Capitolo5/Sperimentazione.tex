@@ -120,3 +120,7 @@ Di Seguito mostriamo il grafico relativo alla \ref{tab:Tabella Miglioramenti}
 	\label{fig:Grafico Miglioramenti}
 \end{figure}
 
+\section{Conclusioni}
+Dopo aver completato la descrizione del progetto sviluppato è necessario fare qualche osservazione:  dalla tabella \ref{tab:Tabella Miglioramenti} possiamo notare che alcuni dataset presentano un peggioramento in termini di prestazioni. Questi risultati sono dovuti dal fatto che l'ammontare di computazione di alcuni dataset era minore dei tempi di sincronizzazione e ricombinazione dei thread generati.
+\section{Lavori Futuri}
+Durante la fase di testing, si è notato che la parte che prendeva più tempo era la parte di MinimalityAndGeneration; su di essa è stata effettuata una parallelizzazione a grana grossa ma, per ottenere prestazioni migliori, è possibile eseguire una parallelizzazione a grana fine.
