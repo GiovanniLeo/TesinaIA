@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.18 (MiKTeX 2.9.6350 64-bit) (preloaded format=pdflatex 2018.4.7)  9 SEP 2018 13:02
+This is pdfTeX, Version 3.14159265-2.6-1.40.18 (MiKTeX 2.9.6350 64-bit) (preloaded format=pdflatex 2018.4.7)  10 SEP 2018 16:09
 entering extended mode
 **./main.tex
 (main.tex
@@ -1251,7 +1251,7 @@ LaTeX Info: Redefining \nameref on input line 5.
 
 \c@lstlisting=\count272
  (Capitoli/Front.tex
-<Immagini/logoUnisa.png, id=163, 351.3125pt x 351.3125pt>
+<Immagini/logoUnisa.png, id=167, 351.3125pt x 351.3125pt>
 File: Immagini/logoUnisa.png Graphic file (type png)
 
 <use Immagini/logoUnisa.png>
@@ -1386,7 +1386,7 @@ Underfull \hbox (badness 10000) in paragraph at lines 100--101
 
  []
 
-<Immagini/Lattice.png, id=380, 407.121pt x 336.0555pt>
+<Immagini/Lattice.png, id=385, 407.121pt x 336.0555pt>
 File: Immagini/Lattice.png Graphic file (type png)
 
 <use Immagini/Lattice.png>
@@ -1398,7 +1398,7 @@ Underfull \hbox (badness 10000) in paragraph at lines 104--105
  []
 
 [22 <./Immagini/Lattice.png>]
-<Immagini/Lattice-taglio.png, id=385, 496.85625pt x 336.0555pt>
+<Immagini/Lattice-taglio.png, id=390, 496.85625pt x 336.0555pt>
 File: Immagini/Lattice-taglio.png Graphic file (type png)
 
 <use Immagini/Lattice-taglio.png>
@@ -1422,42 +1422,42 @@ LaTeX Font Info:    Try loading font information for T1+cmtt on input line 13.
 File: t1cmtt.fd 2014/09/29 v2.5h Standard LaTeX font definitions
 ) [28])
 (Capitoli/Capitolo4/Sezioni/StrutturaDelProgetto.tex [29]
-<Immagini/StrutturaProgetto.png, id=431, 285.4665pt x 150.5625pt>
+<Immagini/StrutturaProgetto.png, id=436, 285.4665pt x 150.5625pt>
 File: Immagini/StrutturaProgetto.png Graphic file (type png)
 
 <use Immagini/StrutturaProgetto.png>
 Package pdftex.def Info: Immagini/StrutturaProgetto.png used on input line 7.
 (pdftex.def)             Requested size: 285.46579pt x 150.56212pt.
 
-<Immagini/PackageRFD.png, id=432, 216.81pt x 143.3355pt>
+<Immagini/PackageRFD.png, id=437, 216.81pt x 143.3355pt>
 File: Immagini/PackageRFD.png Graphic file (type png)
 
 <use Immagini/PackageRFD.png>
 Package pdftex.def Info: Immagini/PackageRFD.png used on input line 16.
 (pdftex.def)             Requested size: 216.80946pt x 143.33513pt.
 
-<Immagini/Executor.PNG, id=433, 623.32875pt x 357.7365pt>
+<Immagini/Executor.PNG, id=438, 623.32875pt x 357.7365pt>
 File: Immagini/Executor.PNG Graphic file (type png)
 
 <use Immagini/Executor.PNG>
 Package pdftex.def Info: Immagini/Executor.PNG used on input line 25.
 (pdftex.def)             Requested size: 436.32715pt x 250.41383pt.
  [30 <./Immagini/StrutturaProgetto.png> <./Immagini/PackageRFD.png>] <Immagini/
-PackageTask.PNG, id=442, 187.902pt x 44.5665pt>
+PackageTask.PNG, id=447, 187.902pt x 44.5665pt>
 File: Immagini/PackageTask.PNG Graphic file (type png)
 
 <use Immagini/PackageTask.PNG>
 Package pdftex.def Info: Immagini/PackageTask.PNG used on input line 34.
 (pdftex.def)             Requested size: 187.90154pt x 44.56638pt.
 
-<Immagini/FeasibilityTask.PNG, id=443, 524.55975pt x 370.38374pt>
+<Immagini/FeasibilityTask.PNG, id=448, 524.55975pt x 370.38374pt>
 File: Immagini/FeasibilityTask.PNG Graphic file (type png)
 
 <use Immagini/FeasibilityTask.PNG>
 Package pdftex.def Info: Immagini/FeasibilityTask.PNG used on input line 41.
 (pdftex.def)             Requested size: 419.64836pt x 296.30739pt.
  [31 <./Immagini/Executor.PNG> <./Immagini/PackageTask.PNG>] <Immagini/Minimali
-tyTask.PNG, id=452, 505.89pt x 390.86024pt>
+tyTask.PNG, id=457, 505.89pt x 390.86024pt>
 File: Immagini/MinimalityTask.PNG Graphic file (type png)
 
 <use Immagini/MinimalityTask.PNG>
@@ -1478,7 +1478,7 @@ Underfull \hbox (badness 10000) in paragraph at lines 11--39
 
 [34
 
-] [35] <Immagini/GraficoTempi.jpg, id=477, 1021.416pt x 696.201pt>
+] [35] <Immagini/GraficoTempi.jpg, id=482, 1021.416pt x 696.201pt>
 File: Immagini/GraficoTempi.jpg Graphic file (type jpg)
 
 <use Immagini/GraficoTempi.jpg>
@@ -1490,7 +1490,7 @@ Overfull \hbox (1.02785pt too wide) in paragraph at lines 77--78
  []
 
 [36 <./Immagini/GraficoTempi.jpg>]
-<Immagini/GraficoMiglioramenti.jpg, id=484, 1053.2148pt x 631.6398pt>
+<Immagini/GraficoMiglioramenti.jpg, id=489, 1053.2148pt x 631.6398pt>
 File: Immagini/GraficoMiglioramenti.jpg Graphic file (type jpg)
 
 <use Immagini/GraficoMiglioramenti.jpg>
@@ -1511,24 +1511,18 @@ Package atveryend Info: Empty hook `AfterLastShipout' on input line 43.
  (main.aux)
 Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 43.
 Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 43.
+Package rerunfilecheck Info: File `main.out' has not changed.
+(rerunfilecheck)             Checksum: A18EFE6266A2D6193C28D73658C245E0;2729.
 
-
-Package rerunfilecheck Warning: File `main.out' has changed.
-(rerunfilecheck)                Rerun to get outlines right
-(rerunfilecheck)                or use package `bookmark'.
-
-Package rerunfilecheck Info: Checksums for `main.out':
-(rerunfilecheck)             Before: A213B5689FF27884AF0187A272869F38;2668
-(rerunfilecheck)             After:  A18EFE6266A2D6193C28D73658C245E0;2729.
 
 LaTeX Warning: There were undefined references.
 
  ) 
 Here is how much of TeX's memory you used:
- 16598 strings out of 493323
- 258816 string characters out of 3139067
+ 16599 strings out of 493323
+ 258829 string characters out of 3139067
  549221 words of memory out of 3000000
- 19629 multiletter control sequences out of 15000+200000
+ 19630 multiletter control sequences out of 15000+200000
  26315 words of font info for 67 fonts, out of 3000000 for 9000
  1141 hyphenation exceptions out of 8191
  45i,16n,53p,1514b,515s stack positions out of 5000i,500n,10000p,200000b,50000s
@@ -1563,9 +1557,9 @@ pe1/public/amsfonts/cm/cmr8.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public
 /amsfonts/cm/cmsy10.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfont
 s/cm/cmsy8.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/symbols
 /msbm10.pfb>
-Output written on main.pdf (43 pages, 1177130 bytes).
+Output written on main.pdf (43 pages, 1177691 bytes).
 PDF statistics:
- 1115 PDF objects out of 1200 (max. 8388607)
+ 1119 PDF objects out of 1200 (max. 8388607)
  128 named destinations out of 1000 (max. 500000)
- 376 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 384 words of extra memory for PDF output out of 10000 (max. 10000000)
 
