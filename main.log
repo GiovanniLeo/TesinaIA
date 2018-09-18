@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.18 (MiKTeX 2.9.6350 64-bit) (preloaded format=pdflatex 2018.4.7)  10 SEP 2018 16:09
+This is pdfTeX, Version 3.14159265-2.6-1.40.18 (MiKTeX 2.9.6350 64-bit) (preloaded format=pdflatex 2018.4.7)  18 SEP 2018 20:51
 entering extended mode
 **./main.tex
 (main.tex
@@ -1557,7 +1557,7 @@ pe1/public/amsfonts/cm/cmr8.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public
 /amsfonts/cm/cmsy10.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfont
 s/cm/cmsy8.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/symbols
 /msbm10.pfb>
-Output written on main.pdf (43 pages, 1177691 bytes).
+Output written on main.pdf (43 pages, 1177676 bytes).
 PDF statistics:
  1119 PDF objects out of 1200 (max. 8388607)
  128 named destinations out of 1000 (max. 500000)
